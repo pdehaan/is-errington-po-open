@@ -1,8 +1,9 @@
 {
   "name": "is-errington-po-open",
   "version": "1.0.0",
-  "description": "",
+  "description": "Is the Errington, BC Post Office currently open?",
   "main": "lib.js",
+  "bin": "cli.js",
   "scripts": {
     "format": "npx prettier *.js --write",
     "lint": "eslint .",
