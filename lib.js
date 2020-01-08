@@ -2,7 +2,10 @@ const schedule = require("./hours");
 
 module.exports = {
   isOpen,
-  getTodaysSchedule
+  getTodaysSchedule,
+  timeToDate,
+  dateFormat,
+  timeFormat
 };
 
 function isOpen(dateObj = new Date()) {
@@ -21,8 +24,8 @@ function isOpen(dateObj = new Date()) {
     isOpen: $label === "open",
     label: $label,
     now: dateObj,
-    nowDate: dateObj.toLocaleDateString([], { dateStyle: "full" }),
-    nowTime: dateObj.toLocaleTimeString([], { timeStyle: "short" })
+    nowDate: dateFormat(dateObj),
+    nowTime: timeFormat(dateObj)
   };
 }
 
@@ -38,4 +41,20 @@ function timeToMins(timeStr) {
 
 function nowToMins(dateObj = new Date()) {
   return dateObj.getHours() * 60 + dateObj.getMinutes();
+}
+
+function timeToDate(timeStr, now = new Date()) {
+  const [h, m] = timeStr.split(":", 2).map(Number);
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const day = now.getDate();
+  return new Date(year, month, day, h, m);
+}
+
+function dateFormat(dateObj = new Date(), dateStyle = "full") {
+  return dateObj.toLocaleDateString([], { dateStyle });
+}
+
+function timeFormat(dateObj = new Date(), timeStyle = "short") {
+  return dateObj.toLocaleTimeString([], { timeStyle });
 }
