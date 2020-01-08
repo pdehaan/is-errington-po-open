@@ -10,10 +10,12 @@ module.exports = {
 
 function isOpen(dateObj = new Date()) {
   const currentTime = nowToMins(dateObj);
+  const schedule = getTodaysSchedule(dateObj);
   let $label = "closed";
+  
 
   // Loop over the current day's schedule and exit early if a match is found.
-  getTodaysSchedule(dateObj).some(([open, close, label = "open"]) => {
+  schedule.some(([open, close, label = "open"]) => {
     if (currentTime >= timeToMins(open) && currentTime < timeToMins(close)) {
       $label = label;
       return true;
@@ -23,6 +25,7 @@ function isOpen(dateObj = new Date()) {
   return {
     isOpen: $label === "open",
     label: $label,
+    schedule,
     now: dateObj,
     nowDate: dateFormat(dateObj),
     nowTime: timeFormat(dateObj)

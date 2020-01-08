@@ -3,4 +3,3 @@
 const lib = require("./lib");
 
 console.log(lib.isOpen());
-console.log(lib.getTodaysSchedule());
